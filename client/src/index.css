@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
+
+* {
+  font-family: "Noto Sans SC", sans-serif;
+}
+
+
+html {
+  background: url("./images/Waiau.svg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  background-color: transparent;
+}
+
+.container-fluid {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+}
+
+.form-container {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 1px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(15.5px);
+  -webkit-backdrop-filter: blur(15.5px);
+  border-radius: 10px;
+  margin-bottom: 35px;
+}
+
+.arrow {
+  cursor: pointer;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #333;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #333;
+}
+
+.table-responsive {
+  height: 600px;
+  overflow-y: auto;
+}
+
+.table-responsive thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Custom Scrollbar */
+.tile--custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+  background-color: #eff1f5;
+}
+
+.tile--custom-scrollbar::-webkit-scrollbar-track{
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.tile--custom-scrollbar::-webkit-scrollbar-thumb{
+  border-radius:5px;
+  background-color:#515769;
+  border:2px solid #eff1f5
+}
+
+/* Loading Animation */
+
+.cssload-loader {
+  width: 97px;
+  height: 19px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+}
+.cssload-loader > div {
+  content: " ";
+  width: 19px;
+  height: 19px;
+  background: rgb(33, 150, 243);
+  border-radius: 100%;
+  position: absolute;
+  animation: cssload-shift 2.3s linear infinite;
+  -o-animation: cssload-shift 2.3s linear infinite;
+  -ms-animation: cssload-shift 2.3s linear infinite;
+  -webkit-animation: cssload-shift 2.3s linear infinite;
+  -moz-animation: cssload-shift 2.3s linear infinite;
+}
+.cssload-loader > div:nth-of-type(1) {
+  animation-delay: -0.46s;
+  -o-animation-delay: -0.46s;
+  -ms-animation-delay: -0.46s;
+  -webkit-animation-delay: -0.46s;
+  -moz-animation-delay: -0.46s;
+}
+.cssload-loader > div:nth-of-type(2) {
+  animation-delay: -0.92s;
+  -o-animation-delay: -0.92s;
+  -ms-animation-delay: -0.92s;
+  -webkit-animation-delay: -0.92s;
+  -moz-animation-delay: -0.92s;
+}
+.cssload-loader > div:nth-of-type(3) {
+  animation-delay: -1.38s;
+  -o-animation-delay: -1.38s;
+  -ms-animation-delay: -1.38s;
+  -webkit-animation-delay: -1.38s;
+  -moz-animation-delay: -1.38s;
+}
+.cssload-loader > div:nth-of-type(4) {
+  animation-delay: -1.84s;
+  -o-animation-delay: -1.84s;
+  -ms-animation-delay: -1.84s;
+  -webkit-animation-delay: -1.84s;
+  -moz-animation-delay: -1.84s;
+}
+
+@keyframes cssload-shift {
+  0% {
+    left: -58px;
+    opacity: 0;
+    background-color: rgb(255, 255, 0);
+  }
+  10% {
+    left: 0;
+    opacity: 1;
+  }
+  90% {
+    left: 97px;
+    opacity: 1;
+  }
+  100% {
+    left: 156px;
+    background-color: rgb(255, 0, 0);
+    opacity: 0;
+  }
+}
+
+@-o-keyframes cssload-shift {
+  0% {
+    left: -58px;
+    opacity: 0;
+    background-color: rgb(255, 255, 0);
+  }
+  10% {
+    left: 0;
+    opacity: 1;
+  }
+  90% {
+    left: 97px;
+    opacity: 1;
+  }
+  100% {
+    left: 156px;
+    background-color: rgb(255, 0, 0);
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes cssload-shift {
+  0% {
+    left: -58px;
+    opacity: 0;
+    background-color: rgb(255, 255, 0);
+  }
+  10% {
+    left: 0;
+    opacity: 1;
+  }
+  90% {
+    left: 97px;
+    opacity: 1;
+  }
+  100% {
+    left: 156px;
+    background-color: rgb(255, 0, 0);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes cssload-shift {
+  0% {
+    left: -58px;
+    opacity: 0;
+    background-color: rgb(255, 255, 0);
+  }
+  10% {
+    left: 0;
+    opacity: 1;
+  }
+  90% {
+    left: 97px;
+    opacity: 1;
+  }
+  100% {
+    left: 156px;
+    background-color: rgb(255, 0, 0);
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes cssload-shift {
+  0% {
+    left: -58px;
+    opacity: 0;
+    background-color: rgb(255, 255, 0);
+  }
+  10% {
+    left: 0;
+    opacity: 1;
+  }
+  90% {
+    left: 97px;
+    opacity: 1;
+  }
+  100% {
+    left: 156px;
+    background-color: rgb(255, 0, 0);
+    opacity: 0;
+  }
+}
