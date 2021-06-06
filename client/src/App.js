@@ -1,5 +1,6 @@
 import Form from "./components/Form";
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import Table from "./components/Table";
 
@@ -7,7 +8,7 @@ function App() {
   const [data, setData] = useState(null);
   const [loadingData, setLoadingData] = useState();
 
-  const reset = () => {
+  const clearTable = () => {
     setData(null);
   };
 
@@ -17,15 +18,21 @@ function App() {
       .get(url, params)
       .then(setLoadingData(true))
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         setData(res.data);
         setLoadingData(false);
+        /* console.log(res.request.responseURL);
+        window.history.pushState(
+          "",
+          "Patent Inquiry System",
+          `/api/patents?id=${res.config.params.id}&title=${res.config.params.title}&inventor=${res.config.params.inventor}&company=${res.config.params.company}&dilldw_num=${res.config.params.dilld_num}`
+        ); */
       });
   };
 
   const loadingAnimation = () => {
     return (
-      <div class="cssload-loader">
+      <div className="cssload-loader">
         <div></div>
         <div></div>
         <div></div>
@@ -35,61 +42,51 @@ function App() {
     );
   };
 
+  const message =
+    !data && !loadingData ? (
+      ""
+    ) : (!data && loadingData) || (data && loadingData) ? (
+      loadingAnimation()
+    ) : data && data.length === 0 ? (
+      <p className="text-danger fw-bold fs-4">No Results Found</p>
+    ) : (
+      ""
+    );
+
   return (
-    <div className="App container my-4">
-      <div className="row">
-        <div className="col">
-          <Form
-            method="GET"
-            action="/api/patents"
-            submit={submit}
-            reset={reset}
-          />
-          {/* route for searching the
-          patents 
-          GET method because we are retrieving data from the server */}
+    <Router>
+      <div className="App container my-4">
+        <div className="row">
+          <div className="col">
+            <h1 className="mb-5 text-center h1">Patent Inquiry System</h1>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <Form
+              method="GET"
+              action="/api/patents"
+              submit={submit}
+              clear={clearTable}
+              message={message}
+              dataState={data}
+            />
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col">
+                {!data ? (
+                  ""
+                ) : data && data.length === 0 ? (
+                  ""
+                ) : (
+                  <Table apiData={data} />
+                )}
+          </div>
         </div>
       </div>
-      <div className="row">
-        <div className="col">
-          {/* <Table data={data} /> */}
-          {/* {() => {
-            if (!data) {
-              return <p>NO QUERY DONE</p>;
-            }
-          }} */}
-          {/* {loadingData ? <p>Loading Please wait...</p> : <Table data={data} />} */}
-          {!data && !loadingData ? (
-            <p>Please Perform a Search</p>
-          ) : !data && loadingData ? (
-            loadingAnimation()
-          ) : data && data.length === 0 ? (
-            <p>No Results Found</p>
-          ) : (
-            <Table apiData={data} />
-          )}
-        </div>
-      </div>
-
-      {/* <Table
-        patentNumber={patentID}
-        inventionName={inventionName}
-        inventor={inventor}
-        company={company}
-        dillwNum={dillnum}
-      /> */}
-      {/* {data && data.length > 0 && data.map((patents) => (
-        <Table
-          patentNumber={patents.id}
-          inventionName={patents.title}
-          inventor={patents.inventor}
-          company={patents.company}
-          dillwNum={patents.dilldw_num}
-        />
-      ))} */}
-
-      {/* {data && data.length > 0 && data.map((patents) => <p>{patents.id}</p>)} */}
-    </div>
+    </Router>
   );
 }
 

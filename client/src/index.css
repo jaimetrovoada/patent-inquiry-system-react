@@ -1,16 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
 
 * {
-  font-family: "Noto Sans SC", sans-serif;
+  /* font-family: "Montserrat", sans-serif; */
+  font-family: "Space Mono", monospace;
 }
 
-
 html {
-  background: url("./images/Waiau.svg") no-repeat center center fixed;
+  background: url("./images/layered-waves-haikei.svg") no-repeat center center
+    fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+  /* background: #faeee7; */
 }
 
 body {
@@ -23,12 +27,13 @@ body {
 }
 
 .form-container {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 1px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(15.5px);
-  -webkit-backdrop-filter: blur(15.5px);
-  border-radius: 10px;
-  margin-bottom: 35px;
+  border-radius: 50px;
+  background: #f7caca;
+  box-shadow: 20px 20px 60px #d2acac, -20px -20px 60px #ffe8e8;
+}
+
+.form-control {
+  border: 2px solid #2d334a;
 }
 
 .arrow {
@@ -62,21 +67,48 @@ body {
   z-index: 1;
 }
 
+.table {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.table th {
+  width: 20%;
+}
+
+.table th > svg {
+  margin-left: 10px;
+}
+
+.noSelect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 /* Custom Scrollbar */
 .tile--custom-scrollbar::-webkit-scrollbar {
   width: 12px;
   background-color: #eff1f5;
 }
 
-.tile--custom-scrollbar::-webkit-scrollbar-track{
+.tile--custom-scrollbar::-webkit-scrollbar-track {
   border-radius: 3px;
   background-color: transparent;
 }
 
-.tile--custom-scrollbar::-webkit-scrollbar-thumb{
-  border-radius:5px;
-  background-color:#515769;
-  border:2px solid #eff1f5
+.tile--custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #515769;
+  border: 2px solid #eff1f5;
 }
 
 /* Loading Animation */
@@ -84,8 +116,6 @@ body {
 .cssload-loader {
   width: 97px;
   height: 19px;
-  position: absolute;
-  left: 50%;
   transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);

@@ -2,8 +2,9 @@ import PropTypes from "prop-types";
 import Button from "./Button";
 import React, { useState } from "react";
 import { getData } from "../functions/getData";
+import { Link } from "react-router-dom";
 
-const Form = ({ method, action, submit, reset }) => {
+const Form = ({ method, action, submit, clear, message, dataState }) => {
   // set initial state
   const [patentNum, setPatentNum] = useState("");
   const [invName, setInvName] = useState("");
@@ -47,96 +48,118 @@ const Form = ({ method, action, submit, reset }) => {
     });
   };
 
-  const resetInputs = () => {
-    reset();
+  const submitText =
+    !patentNum && !invName && !inventor && !company && !dillwNum
+      ? "Search All"
+      : "Search";
+
+  const clearInput = () => {
+    clear();
+    document.getElementById("form").reset();
+    setInvName("");
     setCompany("");
     setDillwNum("");
-    setInvName("");
     setInventor("");
     setPatentNum("");
   };
 
   return (
     <form
-      className="form-container"
+      className="form-container mb-3"
       method={method}
       action={action}
       onSubmit={onSubmit}
+      id="form"
+      autoComplete="off"
     >
-      <div className="container">
-        <div className="input-fields row row-cols-1 row-cols-md-3">
-          <div className="mb-3 col">
+      <div className="container p-4">
+        <div className="input-fields row row-cols-1 row-cols-md-3 mb-4 fw-bold fs-4">
+          <div className="col mb-3">
             <label htmlFor="patentNumber:" className="form-label">
-              中请号/专利号:
+              Patent Number:
             </label>
             <input
               type="text"
               className="form-control"
               id="patentNumber:"
               onChange={handlePatentNumChange}
+              placeholder="Please write the patent number"
             />
           </div>
-          <div className="mb-3 col">
+          <div className="col mb-3">
             <label htmlFor="inventionName" className="form-label">
-              发明名称
+              Title:
             </label>
             <input
               type="text"
               className="form-control"
               id="inventionName"
               onChange={handleInvNameChange}
+              placeholder="Please write the invention name"
             />
           </div>
-          <div className="mb-3 col">
+          <div className="col mb-3">
             <label htmlFor="inventor" className="form-label">
-              发明家
+              Inventor:
             </label>
             <input
               type="text"
               className="form-control"
               id="inventor"
               onChange={handleInventorChange}
+              placeholder="Please write the inventors name"
             />
           </div>
-          <div className="mb-3 col">
+          <div className="col mb-3">
             <label htmlFor="company" className="form-label">
-              公司
+              Company:
             </label>
             <input
               type="text"
               className="form-control"
               id="company"
               onChange={handleCompanyChange}
+              placeholder="Please write the company name"
             />
           </div>
-          <div className="mb-3 col">
+          <div className="col mb-3">
             <label htmlFor="dillwNum" className="form-label">
-              dillw-num
+              dilldw-num:
             </label>
             <input
               type="text"
               className="form-control"
               id="dillwNum"
               onChange={handleDillwNumChange}
+              placeholder="Please write the dillw-num"
             />
           </div>
-        </div>{" "}
+        </div>
         {/* end of input row */}
-        <div className="row row-cols-auto justify-content-center">
+        <div className="row row-cols-auto justify-content-center mb-4">
           <div className="col">
-            <Button text="search" btnType="submit" />
+            <Button text={submitText} btnType="submit" />
           </div>
-          <div className="col">
-            <Button
-              text="reset"
-              classes="btn-secondary"
-              btnType="button"
-              clickAction={resetInputs}
-            />
-          </div>
-        </div>{" "}
-        {/* end of btn row 2 */}
+          {!dataState ? (
+            ""
+          ) : (
+            <div className="col">
+              <Button
+                text="Clear Table"
+                classes="btn-secondary hide"
+                btnType="button"
+                clickAction={clearInput}
+              />
+            </div>
+          )}
+        </div>
+        {/* end of btn row */}
+        <div className="row row-cols-auto justify-content-center mb-4">
+          <div className="col">{message}</div>
+        </div>
+        {/* end of message row */}
       </div>
+      {/* end of container */}
     </form>
   );
 };

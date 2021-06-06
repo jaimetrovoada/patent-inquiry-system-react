@@ -2,7 +2,12 @@ import PropTypes from "prop-types";
 
 const Button = ({ classes, text, btnType, clickAction }) => {
   return (
-    <input type={btnType} value={text} className={`btn mb-3 ${classes}`} onClick={ clickAction}/>
+    <input
+      type={btnType}
+      value={text}
+      className={`btn ${classes}`}
+      onClick={clickAction}
+    />
   );
 };
 

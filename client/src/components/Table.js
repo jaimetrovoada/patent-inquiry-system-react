@@ -1,18 +1,25 @@
 import React, { useMemo } from "react";
 import { useTable, useSortBy } from "react-table";
 import { COLUMNS } from "../functions/columns";
+import { SortAlphaDown, SortAlphaUpAlt } from "react-bootstrap-icons";
 
 const Table = (apiData) => {
-  const newData = Object.values(apiData);
-
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => newData[0], []);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
       {
         columns: columns,
-        data: data,
+        data: Object.values(apiData)[0],
+        initialState: {
+          sortBy: [
+            {
+              id: "id",
+              desc: false,
+            },
+          ],
+        },
+        disableSortRemove: true,
       },
       useSortBy
     );
@@ -23,7 +30,7 @@ const Table = (apiData) => {
         className="table table-striped table-hover align-middle table-fixed"
         {...getTableProps()}
       >
-        <thead className="table-light">
+        <thead className="table-light noSelect">
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
@@ -32,21 +39,21 @@ const Table = (apiData) => {
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render("Header")}
-                  <span
-                    className={
-                      column.isSorted
-                        ? column.isSortedDesc
-                          ? "arrow arrow-down"
-                          : "arrow arrow-up"
-                        : ""
-                    }
-                  ></span>
+                  {column.isSorted ? (
+                    column.isSortedDesc ? (
+                      <SortAlphaUpAlt />
+                    ) : (
+                      <SortAlphaDown />
+                    )
+                  ) : (
+                    ""
+                  )}
                 </th>
               ))}
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()} className="table-secondary">
+        <tbody {...getTableBodyProps()} /* className="table-secondary" */>
           {rows.map((row) => {
             prepareRow(row);
             return (

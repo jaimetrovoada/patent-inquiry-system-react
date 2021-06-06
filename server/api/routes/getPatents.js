@@ -14,11 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 router.get("/", (req, res) => {
   console.log(req.query);
 
-  const myQuery = req.query;
-  function buildConditions(params) {
-    var conditions = [];
-    var values = [];
-    var conditionsStr;
+  function statementBuilder(params) {
+    let conditions = [];
+    let values = [];
 
     if (params.id !== "") {
       conditions.push("id LIKE ?");
@@ -49,12 +47,9 @@ router.get("/", (req, res) => {
   }
 
   //sql statement
-  const conditions = buildConditions(myQuery);
+  const conditions = statementBuilder(req.query);
   console.log(conditions);
   const sqlSelect = `SELECT * FROM newpatent WHERE ${conditions.where}`;
-
-  // route for searching the patents
-  // GET method because we are retrieving data from the server
 
 
   // perform query
@@ -62,7 +57,7 @@ router.get("/", (req, res) => {
   dbConnection
     .promise()
     .query(sqlSelect, conditions.values)
-    .then(([rows, fields]) => {
+    .then(([rows]) => {
       console.log(rows);
       res.send(rows);
     })
